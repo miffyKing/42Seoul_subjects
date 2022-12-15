@@ -6,7 +6,7 @@
 /*   By: chobyounghwa <chobyounghwa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:22:43 by chobyounghw       #+#    #+#             */
-/*   Updated: 2022/12/15 19:09:17 by chobyounghw      ###   ########.fr       */
+/*   Updated: 2022/12/16 00:32:20 by chobyounghw      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int check_format_specifier(const char c, va_list *ap)
         return ft_print_string(va_arg(*ap, const char *));
     }
     // else if (c == 'p'){}
-    // else if (c == 'd'){}
+    else if (c == 'd')
+    {
+        return ft_print_numeric(va_arg(*ap, int), 'd');
+    }
     // else if (c == 'i'){}
     // else if (c == 'u') {}
     // else if (c == 'x') {}
@@ -71,6 +74,7 @@ int ft_printf(const char *format, ...) //왜 const?
 int main()
 {
     ft_printf("qwerty  %c  %%  %c ewerw\n", 'a', 'W');
-    ft_printf("sqwe %s |", "sexsex");
+    ft_printf("sqwe %s |", "sexsex\n");
+    ft_printf("qwe %d sdfsd ", 12);
     return 0;
 }
