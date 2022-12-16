@@ -6,7 +6,7 @@
 /*   By: chobyounghwa <chobyounghwa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:44:01 by chobyounghw       #+#    #+#             */
-/*   Updated: 2022/12/16 00:31:05 by chobyounghw      ###   ########.fr       */
+/*   Updated: 2022/12/17 00:23:24 by chobyounghw      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int ft_print_string(const char *str)
 
 int ft_print_numeric(long long numeric, const char type)
 {
+    
     char * base;
     int base_size;
+    int digit_length;
 
     if (numeric == 0)
     {
@@ -58,9 +60,14 @@ int ft_print_numeric(long long numeric, const char type)
     
     if (num_to_base(numeric, base, base_size) == -1)
         return (-1);
-    
-    
-    return (1);
+    digit_length = 0;
+    if (type == 'd' || type == 'i' || type == 'u')
+    {
+        digit_length = get_length_by_digit(numeric, 10);
+    }
+    else        // u,x,X
+        digit_length = get_length_by_digit(numeric, 16);
+    return (digit_length);
 }
 
 char * ft_setbase(const char type)      
@@ -70,7 +77,7 @@ char * ft_setbase(const char type)
     else if (type == 'x' || type == 'p')
         return ("0123456789abcdef");
     else if (type == 'X')
-        return ("0123456789ABCDEF");
+        return ("0123=456789ABCDEF");
     return (0);   
 }
 
@@ -104,4 +111,59 @@ int num_to_base(long long numeric, char * base, int base_size) //ft_putnbr_base
         idx--;
     }
     return res;
+}
+
+int get_length_by_digit(long long num, int type)
+{
+    int	cnt;
+
+	cnt = 1;
+	if (num < 0)
+	{
+		cnt++;
+		num *= -1;
+	}
+	while (1)
+	{
+		if (num < type)
+			break ;
+		num /= type;
+		cnt++;
+	}
+	return (cnt);
+}
+
+int ft_print_ptr(unsigned long long ptr)
+{
+char	*hex;
+	char	stack[17];
+	int		idx;
+	int		res;
+
+	hex = ft_setbase('X');
+	idx = 0;
+	if (write (1, "0x", 2) == -1)
+		return (-1);
+	if (ptr == 0)
+	{
+		if (write (1, "0", 1) == -1)
+			return (-1);
+		return (3);
+	}
+	while (ptr)
+	{
+		stack[idx] = hex[ptr % 16];
+		ptr /= 16;
+        idx++;
+	}
+	res = idx--;
+	while (idx >= 0)
+    {
+		if (write (1, &stack[idx], 1) == -1)
+		{
+            return (-1);
+        }
+        idx--;
+    }           //여기 메서드로 빼기.
+	return (res + 2);
 }

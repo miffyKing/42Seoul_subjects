@@ -6,7 +6,7 @@
 /*   By: chobyounghwa <chobyounghwa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:22:43 by chobyounghw       #+#    #+#             */
-/*   Updated: 2022/12/16 00:32:20 by chobyounghw      ###   ########.fr       */
+/*   Updated: 2022/12/17 00:35:13 by chobyounghw      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,31 @@ int check_format_specifier(const char c, va_list *ap)
     {
         return ft_print_string(va_arg(*ap, const char *));
     }
-    // else if (c == 'p'){}
+    else if (c == 'p')
+    {
+        return ft_print_ptr(va_arg(*ap, unsigned long long ));
+    }
     else if (c == 'd')
     {
         return ft_print_numeric(va_arg(*ap, int), 'd');
     }
-    // else if (c == 'i'){}
-    // else if (c == 'u') {}
-    // else if (c == 'x') {}
-    // else if (c == 'X') {}
+    else if (c == 'i')
+    {
+        return ft_print_numeric(va_arg(*ap, int), 'i');
+    }
+    else if (c == 'u') 
+    {
+        return ft_print_numeric(va_arg(*ap, unsigned int), 'u');
+    }
+    
+    else if (c == 'x') 
+    {
+        return ft_print_numeric(va_arg(*ap, unsigned int), 'x');   //이거 사이즈 long long 이유?
+    }
+    else if (c == 'X') 
+    {
+        return ft_print_numeric(va_arg(*ap, unsigned int), 'X');   //이거 사이즈 long long 이유?
+    }
     else if (c == '%') 
     {
         return ft_print_char('%');
@@ -71,10 +87,29 @@ int ft_printf(const char *format, ...) //왜 const?
     return (printed_len);
 }
 
+#include <stdio.h>
+
 int main()
 {
-    ft_printf("qwerty  %c  %%  %c ewerw\n", 'a', 'W');
-    ft_printf("sqwe %s |", "sexsex\n");
-    ft_printf("qwe %d sdfsd ", 12);
+    ft_printf("qwerty  %c  %%  %c ewerw\n", 'a', 'W'); // %c , %%
+    printf("qwerty  %c  %%  %c ewerw\n", 'a', 'W');
+    
+    ft_printf("sqwe %s |\n", "hi nice to see u");         // %s
+    printf("sqwe %s |\n", "hi nice to see u");
+
+    ft_printf("qwe %d sdfsd %d \n", 12, __INT_MAX__);                     // "%d"
+    printf("qwe %d sdfsd %d \n", 12, __INT_MAX__);
+
+    int *p;
+
+    ft_printf("%x %X %p dddddddd\n", 162, 162, p);         //%x %X %p
+    printf("%x %X %p dddddddd\n", 162, 162, p);       
+
+    ft_printf("%u sdsdsd\n", __INT_MAX__);
+    printf("%u sdsdsd\n", __INT_MAX__);
+
+    ft_printf("%u sdsdsd\n", 12);
+    printf("%u sdsdsd\n", 12);
+    
     return 0;
 }
