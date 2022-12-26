@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chobyounghwa <chobyounghwa@student.42.f    +#+  +:+       +#+        */
+/*   By: bcho <bcho@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 01:24:00 by chobyounghw       #+#    #+#             */
-/*   Updated: 2022/12/25 01:25:34 by chobyounghw      ###   ########.fr       */
+/*   Updated: 2022/12/26 17:35:31 by bcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,3 @@ size_t	ft_strlen(const char	*str)
 	}
 	return (i);
 }
-

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chobyounghwa <chobyounghwa@student.42.f    +#+  +:+       +#+        */
+/*   By: bcho <bcho@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 00:53:39 by chobyounghw       #+#    #+#             */
-/*   Updated: 2022/12/26 02:05:35 by chobyounghw      ###   ########.fr       */
+/*   Updated: 2022/12/26 20:27:12 by bcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	formatWord(char word, int serverPID)
+void	format_word(char word, int serverpid)
 {
 	unsigned char	num;
 	int				idx;
@@ -21,49 +21,48 @@ void	formatWord(char word, int serverPID)
 	num = 0x80;
 	while (idx < 8)
 	{
-		sendSignal(word & num, serverPID);
+		send_signal(word & num, serverpid);
 		num >>= 1;
 		idx++;
 	}
 	return ;
 }
 
-void	sendSignal(int bit, int serverPID)
+void	send_signal(int bit, int serverpid)
 {
 	if (bit)
-		kill(serverPID, SIGUSR2);
+		kill(serverpid, SIGUSR2);
 	else
-		kill(serverPID, SIGUSR1);
+		kill(serverpid, SIGUSR1);
 	usleep(300);
 	return ;
 }
 
-int main(int argc, char* argv[])
+int	main(int argc, char *argv[])
 {
-    int server_pid;
-    int len;
-    int i;
+	int	server_pid;
+	int	len;
+	int	i;
 
-    if (argc != 3)
-    {
-        ft_putstr_fd("Usage : ./client server process id string\n", 1);
-        return (0);
-    }
-    server_pid = ft_atoi(argv[1]);
-
-    if (!(server_pid > 100 && server_pid < 100000))
+	if (argc != 3)
 	{
-		ft_putstr_fd("Invalid serverPID\n", 1);
+		ft_putstr_fd("format is -> ./client [server PID] [string to send]\n", 1);
+		return (0);
+	}
+	server_pid = ft_atoi(argv[1]);
+	if (!(server_pid > 100 && server_pid < 100000))
+	{
+		ft_putstr_fd("Invalid server process ID\n", 1);
 		return (0);
 	}
 	i = 0;
 	len = ft_strlen(argv[2]);
-	while (i < len)
+	argv[2] = ft_strjoin(argv[2], "\n");
+	while (i < len + 1)
 	{
-		formatWord(argv[2][i], server_pid);
+		format_word(argv[2][i], server_pid);
 		usleep(100);
 		i++;
 	}
-	formatWord('\n', server_pid);
 	return (0);
 }
