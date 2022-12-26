@@ -6,7 +6,7 @@
 /*   By: chobyounghwa <chobyounghwa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 00:53:39 by chobyounghw       #+#    #+#             */
-/*   Updated: 2022/12/27 01:28:34 by chobyounghw      ###   ########.fr       */
+/*   Updated: 2022/12/27 01:39:29 by chobyounghw      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	send_signal(int bit, int serverpid)
 		kill(serverpid, SIGUSR2);
 	else
 		kill(serverpid, SIGUSR1);
-	usleep(300);
+	usleep(100);
 	return ;
 }
 
