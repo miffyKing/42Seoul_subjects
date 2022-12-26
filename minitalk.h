@@ -6,7 +6,7 @@
 /*   By: chobyounghwa <chobyounghwa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 00:53:51 by chobyounghw       #+#    #+#             */
-/*   Updated: 2022/12/26 01:28:40 by chobyounghw      ###   ########.fr       */
+/*   Updated: 2022/12/26 01:40:30 by chobyounghw      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int	ft_atoi(const char *str);
 void handler(int sig);
 void	formatWord(char word, int serverPID);
 void	sendSignal(int bit, int serverPID);
+
+
+void	send_sig(int pid, char *str, int length);
+void	get_str(int pid, char *str);
+
 
 
 

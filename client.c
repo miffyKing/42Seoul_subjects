@@ -6,7 +6,7 @@
 /*   By: chobyounghwa <chobyounghwa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 00:53:39 by chobyounghw       #+#    #+#             */
-/*   Updated: 2022/12/26 01:22:07 by chobyounghw      ###   ########.fr       */
+/*   Updated: 2022/12/26 02:05:35 by chobyounghw      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	sendSignal(int bit, int serverPID)
 		kill(serverPID, SIGUSR2);
 	else
 		kill(serverPID, SIGUSR1);
-	usleep(100);
+	usleep(300);
 	return ;
 }
 
@@ -61,6 +61,7 @@ int main(int argc, char* argv[])
 	while (i < len)
 	{
 		formatWord(argv[2][i], server_pid);
+		usleep(100);
 		i++;
 	}
 	formatWord('\n', server_pid);

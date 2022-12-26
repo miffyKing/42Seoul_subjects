@@ -6,7 +6,7 @@
 /*   By: chobyounghwa <chobyounghwa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 01:15:54 by chobyounghw       #+#    #+#             */
-/*   Updated: 2022/12/26 00:07:24 by chobyounghw      ###   ########.fr       */
+/*   Updated: 2022/12/26 01:35:55 by chobyounghw      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int main(void)
     pid_t   serverPID;    //프로세스 번호를 저장하는 타입. unistd.h 헤더
     
     serverPID = getpid();   //get
-    if (serverPID != 0)
+    if (serverPID )
     {
         ft_putstr_fd("serverPId : ", STDOUT);
         ft_putnbr_fd(serverPID, STDOUT);
@@ -36,8 +36,8 @@ void handler(int sig)
     static char receive = 0;
     static int sendedBit = 0;
 
-    receive = receive<<1;  //1비트 이동.
-    if (sig == SIGUSR1)
+    receive <<=1;  //1비트 이동.
+    if (sig == SIGUSR2)
     {
         receive += 1;
     }
