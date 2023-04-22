@@ -6,7 +6,7 @@
 /*   By: bcho <bcho@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:01:57 by bcho              #+#    #+#             */
-/*   Updated: 2023/04/22 15:02:01 by bcho             ###   ########.fr       */
+/*   Updated: 2023/04/22 15:36:49 by bcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	error_message(char *message)
 {
-	while (*message)
-		write(2, message++, 1);
+	printf("%s\n", message);
 	return (1);
 }
 
@@ -43,8 +42,7 @@ int	error_of_mutex(t_info *info, char *message, int errno)
 
 int	error_of_philo(t_philo *philo, t_info *info, char *message)
 {
-	while (*message)
-		write(2, message++, 1);
+	printf("%s\n", message);
 	ft_free(philo, info);
 	return (1);
 }
